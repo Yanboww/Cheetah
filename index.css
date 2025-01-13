@@ -359,16 +359,19 @@ textarea#sports-opinion {
 }
 
 .graphic-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 8em;
-    background-color: var(--primary-light-color);
-    border-radius: var(--element-border-radius);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: -450%;
+    height: 400%; /* Extended height */
+    z-index: -1; /* Ensure it's in the background */
     text-align: center;
     font-weight: bold;
     color: var(--dark-color);
 }
+
+
+
 
  
 
