@@ -9,6 +9,7 @@ import { updateProfile } from "https://www.gstatic.com/firebasejs/11.1.0/firebas
 import { getFirestore } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"
 import { updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"
+import {  getDocs  } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"
 /* === Firebase Setup === */
 const firebaseConfig = {
   apiKey: "AIzaSyBJJO_cRmJOyTBLu5xVja7ZiAc79BuQ6_4",
@@ -21,7 +22,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
 const db = getFirestore(app);
-console.log(db)
 /* === UI === */
 
 /* == UI - Elements == */
@@ -44,6 +44,8 @@ const userGreetingButtonEl = document.getElementById("greeting-btn")
 
 const textareaEl = document.getElementById("post-input")
 const postButtonEl = document.getElementById("post-btn")
+
+const postsArea = document.getElementById("opinions-grid")
 /* == UI - Event Listeners == */
 
 signInWithGoogleButtonEl.addEventListener("click", authSignInWithGoogle)
@@ -56,10 +58,34 @@ postButtonEl.addEventListener("click", postButtonPressed)
 /* === Main Code === */
 
 showLoggedOutView()
+showPosts()
 
 /* === Functions === */
 
 /* = Functions - Firebase - Authentication = */
+
+async function showPosts(){
+    const querySnapshot = await getDocs(collection(db, "Posts"));
+    querySnapshot.forEach((doc) => {
+    console.log(` ${doc.data().body}`);
+    const data = doc.data()
+    const div = document.createElement("div")
+    div.className = "opinion-card"
+    const name = document.createElement("p")
+    name.innerText = data.poster
+    name.className = "post-body-user"
+    div.appendChild(name)
+    const date = document.createElement("p")
+    date.innerText = data.createdAt
+    date.className = "post-body-data"
+    div.appendChild(date)
+    const post = document.createElement("p")
+    date.innerText = data.body
+    date.className = "post-body-post"
+    div.appendChild(post)
+    postsArea.appendChild(div)
+  });
+}
 
 function authSignInWithGoogle() {
     console.log("Sign in with Google")
@@ -169,6 +195,14 @@ function showLoggedOutView() {
     if(user.displayName == null)
     {
         greeting = "Please set greeting"
+        const user = auth.currentUser
+        updateProfile(user, {
+        displayName: user.uid
+        }).then(() => {
+          console.log("updated")
+        }).catch((error) => {
+          console.log(error)
+        });
     }
     userGreetingEl.innerText = greeting
   }
@@ -200,7 +234,8 @@ async function addPostToDB(postBody, user) {
         const docRef = await addDoc(collection(db, "Posts"), {
           body: postBody,
           uid: user.uid,
-          createdAt: serverTimestamp()
+          createdAt: serverTimestamp(),
+          poster: user.displayName
         });
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
@@ -212,6 +247,3 @@ function clearInputField(textareaEl)
 {
   textareaEl.value =""
 }
-
-
-//credit: coursera
