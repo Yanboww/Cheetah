@@ -65,6 +65,7 @@ showPosts()
 /* = Functions - Firebase - Authentication = */
 
 async function showPosts(){
+    postsArea.innerHTML =""
     const querySnapshot = await getDocs(collection(db, "Posts"));
     querySnapshot.forEach((doc) => {
     console.log(` ${doc.data().body}`);
@@ -76,12 +77,14 @@ async function showPosts(){
     name.className = "post-body-user"
     div.appendChild(name)
     const date = document.createElement("p")
-    date.innerText = data.createdAt
-    date.className = "post-body-data"
+    date.innerText = data.createdAt.toDate().toDateString()
+    console.log(date)
+    date.className = "post-body-date"
     div.appendChild(date)
+    console.log(data.createdAt.toDate().toDateString())
     const post = document.createElement("p")
-    date.innerText = data.body
-    date.className = "post-body-post"
+    post.innerText = data.body
+    post.className = "post-body-post"
     div.appendChild(post)
     postsArea.appendChild(div)
   });
@@ -237,7 +240,21 @@ async function addPostToDB(postBody, user) {
           createdAt: serverTimestamp(),
           poster: user.displayName
         });
-        console.log("Document written with ID: ", docRef.id);
+        const div = document.createElement("div")
+        div.className = "opinion-card"
+        const name = document.createElement("p")
+        name.innerText = user.displayName
+        name.className = "post-body-user"
+        div.appendChild(name)
+        const date = document.createElement("p")
+        date.innerText = serverTimestamp()
+        date.className = "post-body-date"
+        div.appendChild(date)
+        const post = document.createElement("p")
+        post.innerText = postBody 
+        post.className = "post-body-post"
+        div.appendChild(post)
+        postsArea.appendChild(div)
       } catch (e) {
         console.error("Error adding document: ", e);
       }
