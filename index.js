@@ -23,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
 const db = getFirestore(app);
 /* === UI === */
-
+let mood = "assets/images/grin.png"
 /* == UI - Elements == */
 
 const viewLoggedOut = document.getElementById("logged-out-view")
@@ -46,6 +46,10 @@ const textareaEl = document.getElementById("post-input")
 const postButtonEl = document.getElementById("post-btn")
 
 const postsArea = document.getElementById("opinions-grid")
+
+const smile = document.getElementById("smile-btn")
+const neutral = document.getElementById("neutral-btn")
+const sad = document.getElementById("sad-btn")
 /* == UI - Event Listeners == */
 
 signInWithGoogleButtonEl.addEventListener("click", authSignInWithGoogle)
@@ -55,13 +59,24 @@ createAccountButtonEl.addEventListener("click", authCreateAccountWithEmail)
 userProfilePictureEl.addEventListener("click",setProfilePicture)
 userGreetingButtonEl.addEventListener("click",setUserGreeting)
 postButtonEl.addEventListener("click", postButtonPressed)
+smile.addEventListener("click", smileButtonPressed)
+sad.addEventListener("click", sadButtonPressed)
+neutral.addEventListener("click", neutralButtonPressed)
 /* === Main Code === */
 
 showLoggedOutView()
 showPosts()
 
 /* === Functions === */
-
+function smileButtonPressed(){
+  mood = "assets/images/grin.png"
+}
+function sadButtonPressed(){
+  mood = "assets/images/cry.png"
+}
+function neutralButtonPressed(){
+  mood = "assets/images/neutral_face.png"
+}
 /* = Functions - Firebase - Authentication = */
 
 async function showPosts(){
@@ -72,6 +87,10 @@ async function showPosts(){
     const data = doc.data()
     const div = document.createElement("div")
     div.className = "opinion-card"
+    const moodPost = document.createElement("img")
+    moodPost.src = data.emoji
+    moodPost.className = "post-body-mood"
+    div.appendChild(moodPost)
     const name = document.createElement("p")
     name.innerText = data.poster
     name.className = "post-body-user"
@@ -238,10 +257,15 @@ async function addPostToDB(postBody, user) {
           body: postBody,
           uid: user.uid,
           createdAt: serverTimestamp(),
-          poster: user.displayName
+          poster: user.displayName,
+          emoji: mood
         });
         const div = document.createElement("div")
         div.className = "opinion-card"
+        const moodPost = document.createElement("img")
+        moodPost.src = mood
+        moodPost.className = "post-body-mood"
+        div.appendChild(moodPost)
         const name = document.createElement("p")
         name.innerText = user.displayName
         name.className = "post-body-user"
