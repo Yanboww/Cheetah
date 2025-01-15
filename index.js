@@ -247,7 +247,7 @@ async function addPostToDB(postBody, user) {
         name.className = "post-body-user"
         div.appendChild(name)
         const date = document.createElement("p")
-        date.innerText = serverTimestamp()
+        date.innerText = new Date().toDateString();
         date.className = "post-body-date"
         div.appendChild(date)
         const post = document.createElement("p")
