@@ -70,12 +70,22 @@ showPosts()
 /* === Functions === */
 function smileButtonPressed(){
   mood = "assets/images/grin.png"
+  console.log(smile.className)
+  smile.className += " highlight"
+  sad.clasName = "mood-btn"
+  neutral.className = "mood-btn"
 }
 function sadButtonPressed(){
   mood = "assets/images/cry.png"
+  sad.className += " highlight"
+  smile.clasName = "mood-btn"
+  neutral.className = "mood-btn"
 }
 function neutralButtonPressed(){
   mood = "assets/images/neutral_face.png"
+  neutral.className += " highlight"
+  smile.clasName = "mood-btn"
+  sad.className = "mood-btn"
 }
 /* = Functions - Firebase - Authentication = */
 
