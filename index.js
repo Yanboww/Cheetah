@@ -70,22 +70,12 @@ showPosts()
 /* === Functions === */
 function smileButtonPressed(){
   mood = "assets/images/grin.png"
-  console.log(smile.className)
-  smile.className += " highlight"
-  sad.clasName = "mood-btn"
-  neutral.className = "mood-btn"
 }
 function sadButtonPressed(){
   mood = "assets/images/cry.png"
-  sad.className += " highlight"
-  smile.clasName = "mood-btn"
-  neutral.className = "mood-btn"
 }
 function neutralButtonPressed(){
   mood = "assets/images/neutral_face.png"
-  neutral.className += " highlight"
-  smile.clasName = "mood-btn"
-  sad.className = "mood-btn"
 }
 /* = Functions - Firebase - Authentication = */
 
@@ -293,6 +283,34 @@ async function addPostToDB(postBody, user) {
         console.error("Error adding document: ", e);
       }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  const smileBtn = document.getElementById("smile-btn");
+  const neutralBtn = document.getElementById("neutral-btn");
+  const sadBtn = document.getElementById("sad-btn");
+
+  function removeClickedClass() {
+      smileBtn.classList.remove("clicked");
+      neutralBtn.classList.remove("clicked");
+      sadBtn.classList.remove("clicked");
+  }
+
+  smileBtn.addEventListener("click", function() {
+      removeClickedClass();
+      smileBtn.classList.add("clicked");
+  });
+
+  neutralBtn.addEventListener("click", function() {
+      removeClickedClass();
+      neutralBtn.classList.add("clicked");
+  });
+
+  sadBtn.addEventListener("click", function() {
+      removeClickedClass();
+      sadBtn.classList.add("clicked");
+  });
+});
+
 
 function clearInputField(textareaEl)
 {

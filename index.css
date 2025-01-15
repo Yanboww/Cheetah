@@ -36,6 +36,9 @@ body {
     font-family: var(--primary-font);
 }
 
+
+
+
 /* === Typography === */
 
 h1, h2 {
@@ -322,6 +325,11 @@ textarea#sports-opinion {
     flex-direction: column;
     width: 60%;
     gap: 2em;
+    background-image: url('assets/wp.png');
+    background-size: cover; /* Adjust this value as needed */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 .sport-buttons {
@@ -368,6 +376,25 @@ textarea#sports-opinion {
     text-align: center;
     font-weight: bold;
     color: var(--dark-color);
+}
+
+#smile-btn, #neutral-btn, #sad-btn {
+    width: 25%; 
+    height: auto;
+    transition: box-shadow 0.3s ease; 
+}
+
+/* Highlight effect on hover */
+#smile-btn:hover, #neutral-btn:hover, #sad-btn:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); 
+}
+
+#smile-btn:active, #neutral-btn:active, #sad-btn:active {
+     filter: brightness(0.8); 
+}
+.clicked { 
+    box-shadow: 0 0 10px rgba(87, 72, 72, 0.8); 
+    filter: brightness(0.8); 
 }
 
 
