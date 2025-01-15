@@ -24,6 +24,7 @@ const auth = getAuth(app)
 const db = getFirestore(app);
 /* === UI === */
 let mood = "assets/images/grin.png"
+let question = ""
 /* == UI - Elements == */
 
 const viewLoggedOut = document.getElementById("logged-out-view")
@@ -50,6 +51,7 @@ const postsArea = document.getElementById("opinions-grid")
 const smile = document.getElementById("smile-btn")
 const neutral = document.getElementById("neutral-btn")
 const sad = document.getElementById("sad-btn")
+
 /* == UI - Event Listeners == */
 
 signInWithGoogleButtonEl.addEventListener("click", authSignInWithGoogle)
@@ -68,6 +70,18 @@ showLoggedOutView()
 showPosts()
 
 /* === Functions === */
+async function getQuestions(){
+  let questionArr = []
+  const response = await fetch("assets/questions.txt")
+  if(response.status == 200)
+  {
+    let text = await response.text()
+    questionArr = text.split("\n")
+    question = questionArr[Math.floor(Math.random() * 4)]
+  }
+  console.log(question)
+  textareaEl.placeholder = question
+}
 function smileButtonPressed(){
   mood = "assets/images/grin.png"
 }
@@ -81,7 +95,8 @@ function neutralButtonPressed(){
 
 async function showPosts(){
     postsArea.innerHTML =""
-    const querySnapshot = await getDocs(collection(db, "Posts"));
+    await getQuestions()
+    const querySnapshot = await getDocs(collection(db, question));
     querySnapshot.forEach((doc) => {
     console.log(` ${doc.data().body}`);
     const data = doc.data()
@@ -253,7 +268,7 @@ function postButtonPressed() {
 
 async function addPostToDB(postBody, user) {
       try {
-        const docRef = await addDoc(collection(db, "Posts"), {
+        const docRef = await addDoc(collection(db, question), {
           body: postBody,
           uid: user.uid,
           createdAt: serverTimestamp(),
