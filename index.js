@@ -74,6 +74,9 @@ showPosts()
 /* === Functions === */
 function goToGeneralPage(){
   location.href="post.html"
+  localStorage.setItem("auth",auth)
+  localStorage.setItem("auth",app)
+  localStorage.setItem("db",db)
 }
 
 async function getQuestions(){
