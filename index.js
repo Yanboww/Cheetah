@@ -52,6 +52,7 @@ const smile = document.getElementById("smile-btn")
 const neutral = document.getElementById("neutral-btn")
 const sad = document.getElementById("sad-btn")
 
+const goGeneral = document.getElementById("general-btn")
 /* == UI - Event Listeners == */
 
 signInWithGoogleButtonEl.addEventListener("click", authSignInWithGoogle)
@@ -64,12 +65,17 @@ postButtonEl.addEventListener("click", postButtonPressed)
 smile.addEventListener("click", smileButtonPressed)
 sad.addEventListener("click", sadButtonPressed)
 neutral.addEventListener("click", neutralButtonPressed)
+goGeneral.addEventListener("click",goToGeneralPage)
 /* === Main Code === */
 
 showLoggedOutView()
 showPosts()
 
 /* === Functions === */
+function goToGeneralPage(){
+  location.href="post.html"
+}
+
 async function getQuestions(){
   let questionArr = []
   const response = await fetch("assets/questions.txt")
