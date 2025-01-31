@@ -51,6 +51,9 @@ const postsArea = document.getElementById("opinions-grid")
 const smile = document.getElementById("smile-btn")
 const neutral = document.getElementById("neutral-btn")
 const sad = document.getElementById("sad-btn")
+const joy = document.getElementById("joy-btn")
+const mad = document.getElementById("mad-btn")
+const annoyed = document.getElementById("annoyed-btn")
 
 const goGeneral = document.getElementById("general-btn")
 /* == UI - Event Listeners == */
@@ -65,6 +68,10 @@ postButtonEl.addEventListener("click", postButtonPressed)
 smile.addEventListener("click", smileButtonPressed)
 sad.addEventListener("click", sadButtonPressed)
 neutral.addEventListener("click", neutralButtonPressed)
+joy.addEventListener("click", joyButtonPressed)
+mad.addEventListener("click", madButtonPressed)
+annoyed.addEventListener("click", annoyedButtonPressed)
+
 goGeneral.addEventListener("click",goToGeneralPage)
 /* === Main Code === */
 
@@ -99,6 +106,15 @@ function sadButtonPressed(){
 }
 function neutralButtonPressed(){
   mood = "assets/images/neutral_face.png"
+}
+function joyButtonPressed() {
+  mood = "assets/images/joy.png";
+}
+function madButtonPressed() {
+  mood = "assets/images/mad.png";
+}
+function annoyedButtonPressed() {
+  mood = "assets/images/annoyed.png";
 }
 /* = Functions - Firebase - Authentication = */
 

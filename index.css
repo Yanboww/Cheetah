@@ -387,18 +387,18 @@ textarea#sports-opinion {
     color: var(--dark-color);
 }
 
-#smile-btn, #neutral-btn, #sad-btn {
+#smile-btn, #neutral-btn, #sad-btn, #mad-btn, #joy-btn, #annoyed-btn {
     width: 25%; 
     height: auto;
     transition: box-shadow 0.3s ease; 
 }
 
 /* Highlight effect on hover */
-#smile-btn:hover, #neutral-btn:hover, #sad-btn:hover {
+#smile-btn:hover, #neutral-btn:hover, #sad-btn:hover, #mad-btn:hover, #joy-btn:hover, #annoyed-btn:hover {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); 
 }
 
-#smile-btn:active, #neutral-btn:active, #sad-btn:active {
+#smile-btn:active, #neutral-btn:active, #sad-btn:active,  #mad-btn:active, #joy-btn:active, #annoyed-btn:active{
      filter: brightness(0.8); 
 }
 .clicked { 
