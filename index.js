@@ -12,12 +12,12 @@ import { updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/1
 import {  getDocs  } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"
 /* === Firebase Setup === */
 const firebaseConfig = {
-  apiKey: "AIzaSyBJJO_cRmJOyTBLu5xVja7ZiAc79BuQ6_4",
-  authDomain: "cheetah-5a6ca.firebaseapp.com",
-  projectId: "cheetah-5a6ca",
-  storageBucket: "cheetah-5a6ca.firebasestorage.app",
-  messagingSenderId: "82862862686",
-  appId: "1:82862862686:web:96de9051ca3a6bf42f1fcf"
+  apiKey: /*api key*/,
+  authDomain: /*auth*/,
+  projectId: /*projectId*/,
+  storageBucket: /*storage-bucket*/,
+  messagingSenderId: /*id*/,
+  appId: /*ap-id*/
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
@@ -355,4 +355,5 @@ document.addEventListener("DOMContentLoaded", function() {
 function clearInputField(textareaEl)
 {
   textareaEl.value =""
+
 }
